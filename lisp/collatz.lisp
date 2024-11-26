@@ -8,4 +8,14 @@
              (incf counter)))
     counter))
 
-(format t "~a~%" (calculate_sequence_length 989345275647))
+(defun get_min_index(seq_list)
+  (let ((min_ind 0))
+    (dotimes (i (length seq_list))
+      (let ((min_pair (nth min_ind seq_list)))
+        (if (< (second (nth i seq_list)) (second min_pair))
+          (setf min_ind i))
+        (if (= (second (nth i seq_list)) (second min_pair))
+          (if (> (first (nth i seq_list)) (first min_pair))
+            (setf min_ind i)))))
+    min_ind))
+
