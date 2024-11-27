@@ -42,6 +42,7 @@ function compare_and_add(n:: UInt128, seq_len:: UInt128, seq_list:: Vector{Vecto
 
     if length(seq_list) < 10
         push!(seq_list, [n, seq_len])
+        return
     end
 
     min_ind = get_min_index(seq_list)
