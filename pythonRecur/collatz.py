@@ -41,12 +41,12 @@ def compare_and_add(n, seq_len, seq_list):
         seq_list[min_ind] = [n, seq_len]
 
 def print_by_seq_len(seq_list):
-    print("Sorted based on sequence length:")
+    print("Sorted based on sequence length")
     for item in sorted(seq_list, key=lambda x: x[1], reverse=True):
         print(f"{item[0]:>20} {item[1]:>20}")
 
 def print_by_n(seq_list):
-    print("Sorted based on integer size:")
+    print("Sorted based on integer size")
     for item in sorted(seq_list, key=lambda x: x[0], reverse=True):
         print(f"{item[0]:>20} {item[1]:>20}")
 
