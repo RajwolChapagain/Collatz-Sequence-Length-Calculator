@@ -5,10 +5,11 @@ if [ "$#" -lt 2 ]; then
     exit 1
 fi
 
-CMD1="python3 python/collatz.py"
-CMD2="sbcl --script lispRecur/collatz.lisp"
+CMD1="python3 pythonRecur/collatz.py"
+CMD2="cargo run --manifest-path rustRecur/Cargo.toml"
 
 GREEN='\033[0;32m'
+RED='\033[0;31m'
 NC='\033[0m' # No Color
 
 echo -e "******* Comparing commands (${GREEN}$CMD1${NC}) and (${GREEN}$CMD2${NC}) *******"
@@ -16,12 +17,14 @@ echo
 
 echo "Range: $1 to $2"
 
-diff --side-by-side --suppress-common-lines <($CMD1 $1 $2) <($CMD2 $1 $2)
+diff --side-by-side <($CMD1 $1 $2) <($CMD2 $1 $2)
 
+echo
+echo
 if [ $?  -eq 0 ]; then
-    echo "The outputs are identical for the given range"
+    echo -e "${GREEN}****** The outputs are identical for the given range ******${NC}"
 else
-    echo "The outputs differ for for the given range"
+    echo -e "${RED}The outputs differ for for the given range${NC}"
 fi
 
 echo
