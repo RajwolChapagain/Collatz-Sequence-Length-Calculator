@@ -37,3 +37,17 @@ cd lispRecur
 ```
 sbcl --script collatz.lisp 50 100
 ```
+
+### Rust
+1. Navigate to the rust or rustRecur directory depending on whether you want to run the loop-based or the recursive implmentation of the program.
+```
+cd rust
+```
+or
+```
+cd rustRecur
+```
+2. Run the program by passing in two integers in the range 1 to 2,100,000,000 as command-line arguments to the program:
+```
+cargo run 50 100
+```
