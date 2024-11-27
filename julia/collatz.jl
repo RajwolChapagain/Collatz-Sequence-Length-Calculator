@@ -41,7 +41,7 @@ function compare_and_add(n:: UInt128, seq_len:: UInt128, seq_list:: Vector{Vecto
     end
 
     if length(seq_list) < 10
-        push!(seq_list, Vector{UInt128}(n, seq_len))
+        push!(seq_list, [n, seq_len])
     end
 
     min_ind = get_min_index(seq_list)
@@ -54,7 +54,8 @@ end
 
 function print_by_seq_len(seq_list:: Vector{Vector{UInt128}})
     println("Sorted based on sequence length")
-    sorted_vector = sort(outer_vector, by = x -> x[2])
+    sorted_vector = sort(seq_list, by = x -> x[2])
+    reverse!(sorted_vector)
 
     for item in sorted_vector
         @printf("%20s %20s\n", item[1], item[2])
@@ -63,12 +64,31 @@ end
 
 function print_by_n(seq_list:: Vector{Vector{UInt128}})
     println("Sorted based on integer size")
-    sorted_vector = sort(outer_vector, by = x -> x[1])
+    sorted_vector = sort(seq_list, by = x -> x[1])
+    reverse!(sorted_vector)
 
     for item in sorted_vector
         @printf("%20s %20s\n", item[1], item[2])
     end
 end
 
-println(calculate_sequence_length(UInt128(989345275647)))
+function main()
+    seq_list = Vector{Vector{UInt128}}()
 
+    start_val = parse(UInt128, ARGS[1])
+    end_val = parse(UInt128, ARGS[2])
+
+    for i in range(start_val, end_val)
+        if i % 100000 == 0
+            @printf("At %s\n", string(i, format="a"))
+        end
+
+        seq_len = calculate_sequence_length(i)
+        compare_and_add(i, seq_len, seq_list)
+    end
+
+    print_by_seq_len(seq_list)
+    print_by_n(seq_list)
+end
+
+main()
