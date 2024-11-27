@@ -39,13 +39,13 @@
   (format t "Sorted based on sequence length~%")
   (let ((sorted_list (sort (copy-list seq_list) #'> :key #'second)))
     (dolist (item sorted_list)
-      (format t "~20@a~20@a~%" (first item) (second item)))))
+      (format t "~20@a ~20@a~%" (first item) (second item)))))
 
 (defun print_by_n(seq_list)
   (format t "Sorted based on integer size~%")
   (let ((sorted_list (sort (copy-list seq_list) #'> :key #'first)))
     (dolist (item sorted_list)
-      (format t "~20@a~20@a~%" (first item) (second item)))))
+      (format t "~20@a ~20@a~%" (first item) (second item)))))
 
 (defun main()
   (let ((seq_list (list)))
