@@ -50,6 +50,8 @@
 (defun main()
   (let ((seq_list (list)))
     (loop for i from (parse-integer (second sb-ext:*posix-argv*)) to (+ (parse-integer (third sb-ext:*posix-argv*)) 1 ) do
+          (if (= 0 (mod i 100000))
+            (format t "At ~:D~%" i))
           (setf seq_list (compare_and_add i (calculate_sequence_length i) seq_list)))
     (print_by_seq_len seq_list)
     (print_by_n seq_list)))

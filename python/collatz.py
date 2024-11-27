@@ -54,6 +54,9 @@ def main():
     end = int(sys.argv[2])
 
     for i in range(start, end+1):
+        if i % 100000 == 0:
+            print(f"At {i:,}")
+
         seq_len = calculate_sequence_length(i)
         compare_and_add(i, seq_len, seq_list)
 
