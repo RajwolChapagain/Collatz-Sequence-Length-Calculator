@@ -46,4 +46,23 @@ public class Collatz {
         return min_ind;
     }
 
+    public static void CompareAndAdd(BigInteger n, BigInteger seq_len, List<List<BigInteger>> seq_list) {
+        foreach (var pair in seq_list) {
+            if (seq_len == pair[1]) {
+                return;
+            }
+        }
+
+        if (seq_list.Count < 10) {
+            seq_list.Add(new List<BigInteger> {n, seq_len});
+            return;
+        }
+
+        int min_ind = GetMinIndex(seq_list);
+        var min_pair = seq_list[min_ind];
+
+        if (seq_len > min_pair[1]) {
+            seq_list[min_ind] = new List<BigInteger> {n, seq_len};
+        }
+    }
 }
