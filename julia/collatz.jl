@@ -81,7 +81,7 @@ function main()
 
     for i in range(start_val, end_val)
         if i % 100000 == 0
-            @printf("At %s\n", string(i, format="a"))
+            println("At ", i)
         end
 
         seq_len = calculate_sequence_length(i)
