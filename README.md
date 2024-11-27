@@ -51,3 +51,21 @@ cd rustRecur
 ```
 cargo run 50 100
 ```
+
+### C#
+1. Navigate to the c# or c#Recur directory depending on whether you want to run the loop-based or the recursive implmentation of the program.
+```
+cd c#
+```
+or
+```
+cd c#Recur
+```
+2. Compile the program:
+```
+mcs -r:System.Numerics Collatz.cs
+```
+2. Run the program by passing in two integers in the range 1 to 2,100,000,000 as command-line arguments to the program:
+```
+mono Collatz.exe 50 100
+```
