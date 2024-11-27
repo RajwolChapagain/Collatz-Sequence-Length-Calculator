@@ -25,4 +25,25 @@ public class Collatz {
         return counter;
     }
 
+    public static int GetMinIndex(List<List<BigInteger>> seq_list) {
+        int min_ind = 0;
+        
+        int i = 0;
+        foreach (var pair in seq_list) {
+            var min_pair = seq_list[min_ind];
+
+            if (pair[1] < min_pair[1]) {
+                min_ind = i;
+            }
+            else if (pair[1] == min_pair[1]) {
+                if (pair[0] > min_pair[0]) {
+                    min_ind = i;
+                }
+            }
+            i++;
+        }
+
+        return min_ind;
+    }
+
 }
