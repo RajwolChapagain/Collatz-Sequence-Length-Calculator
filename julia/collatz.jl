@@ -13,5 +13,23 @@ function calculate_sequence_length(n:: UInt128)
     return counter
 end
 
+function get_min_index(seq_list:: Vector{Vector{UInt128}})
+    min_ind = 1
+
+    for (i, pair) in enumerate(seq_list)
+        min_pair = seq_list[min_ind]
+
+        if pair[2] < min_pair[2]
+            min_ind = i
+        elseif pair[2] == min_pair[2]
+            if pair[1] > min_pair[1]
+                min_ind = i
+            end
+        end
+    end
+
+    return min_ind
+end
+
 println(calculate_sequence_length(UInt128(989345275647)))
 
