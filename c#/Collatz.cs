@@ -1,11 +1,22 @@
 using System;
 using System.Numerics;
 using System.Collections.Generic;
+using System.Linq;
 
 public class Collatz {
     public static void Main(string[] args) {
-        BigInteger test = CalculateSequenceLength(989345275647);
-        Console.WriteLine(test);
+        List<List<BigInteger>> seq_list = new List<List<BigInteger>>();
+
+        BigInteger start = BigInteger.Parse(args[0]);
+        BigInteger end = BigInteger.Parse(args[1]);
+
+        for (BigInteger i = start; i < end + 1; i++) {
+            BigInteger seq_len = CalculateSequenceLength(i);
+            CompareAndAdd(i, seq_len, seq_list);
+        }
+
+        PrintBySeqLen(seq_list);
+        PrintByN(seq_list);
     }
 
     public static BigInteger CalculateSequenceLength(BigInteger n) {
@@ -63,6 +74,24 @@ public class Collatz {
 
         if (seq_len > min_pair[1]) {
             seq_list[min_ind] = new List<BigInteger> {n, seq_len};
+        }
+    }
+
+    public static void PrintBySeqLen(List<List<BigInteger>> seq_list) {
+        Console.WriteLine("Sorted based on sequence length");
+        var sorted_list = seq_list.OrderByDescending(pair => pair[1]).ToList();
+
+        foreach (var item in sorted_list) {
+            Console.WriteLine(string.Format("{0,20} {1,20}", item[0], item[1]));
+        }
+    }
+
+    public static void PrintByN(List<List<BigInteger>> seq_list) {
+        Console.WriteLine("Sorted based on integer size");
+        var sorted_list = seq_list.OrderByDescending(pair => pair[0]).ToList();
+
+        foreach (var item in sorted_list) {
+            Console.WriteLine(string.Format("{0,20} {1,20}", item[0], item[1]));
         }
     }
 }
