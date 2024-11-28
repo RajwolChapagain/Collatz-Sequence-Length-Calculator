@@ -83,3 +83,21 @@ cd juliaRecur
 ```
 julia collatz.jl 50 100
 ```
+
+### Fortran
+1. Navigate to the fortran or fortranRecur directory depending on whether you want to run the loop-based or the recursive implmentation of the program.
+```
+cd fortran
+```
+or
+```
+cd fortranRecur
+```
+2. Compile the program:
+```
+gfortran collatz.f90 -fno-range-check
+```
+3. Run the program by passing in two integers in the range 1 to 2,100,000,000 as command-line arguments to the program:
+```
+./a.out 50 100
+```
