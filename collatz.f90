@@ -1,14 +1,19 @@
 program collatz
     integer(kind=16), allocatable :: seq_list(:,:)
-    integer ind
+    character(50) :: arg1, arg2
+    integer(kind=16) :: start_val, end_val
+    integer(kind=16) i, seq_len
 
-    call compare_and_add(10_16, 90_16, seq_list) 
-    call compare_and_add(12_16, 80_16, seq_list) 
-    call compare_and_add(14_16, 46_16, seq_list) 
-    call compare_and_add(18_16, 60_16, seq_list) 
-    call compare_and_add(19_16, 70_16, seq_list) 
+    call get_command_argument(1, arg1)
+    call get_command_argument(2, arg2)
 
+    read(arg1, *) start_val
+    read(arg2, *) end_val
 
+    do i = start_val, end_val
+        seq_len = calculate_sequence_length(i)
+        call compare_and_add(i, seq_len, seq_list)
+    end do
 
     call print_by_seq_len(seq_list)
     call print_by_n(seq_list)
@@ -124,22 +129,28 @@ contains
         integer(kind=16) :: temp(2)
 
         ! Copy input array to avoid modifying it
-        sorted_list = seq_list
+        allocate(sorted_list( size(seq_list, dim=1), 2))
+
+        do i = 1, size(seq_list, dim=1)
+            sorted_list(i, 1) = seq_list(i, 1)
+            sorted_list(i, 2) = seq_list(i, 2)
+        end do
+
 
         ! Bubble sort by sequence length (second column)
         do i = 1, size(sorted_list, dim=1) - 1
-        do j = 1, size(sorted_list, dim=1) - 1 -i
-        if (sorted_list(j,2) < sorted_list(j+1,2)) then
-            ! Swap entire rows
-            temp = sorted_list(j,:)
-            sorted_list(j,:) = sorted_list(j+1,:)
-            sorted_list(j+1,:) = temp
-        end if
-        end do
+            do j = 1, size(sorted_list, dim=1) - i
+                if (sorted_list(j,2) < sorted_list(j+1,2)) then
+                    ! Swap entire rows
+                    temp = sorted_list(j,:)
+                    sorted_list(j,:) = sorted_list(j+1,:)
+                    sorted_list(j+1,:) = temp
+                end if
+            end do
         end do
 
         print *, "Sorted based on sequence length"
-        do i = 1, size(sorted_list, dim=1) - 1
+        do i = 1, size(sorted_list, dim=1)
             write(*,'(2I20)') sorted_list(i,1), sorted_list(i,2)
         end do
     end subroutine print_by_seq_len
@@ -154,18 +165,18 @@ contains
         sorted_list = seq_list
 
         do i = 1, size(sorted_list, dim=1) - 1
-        do j = 1, size(sorted_list, dim=1) - 1 -i
-        if (sorted_list(j,1) < sorted_list(j+1,1)) then
-            ! Swap entire rows
-            temp = sorted_list(j,:)
-            sorted_list(j,:) = sorted_list(j+1,:)
-            sorted_list(j+1,:) = temp
-        end if
-        end do
+            do j = 1, size(sorted_list, dim=1) - i
+                if (sorted_list(j,1) < sorted_list(j+1,1)) then
+                    ! Swap entire rows
+                    temp = sorted_list(j,:)
+                    sorted_list(j,:) = sorted_list(j+1,:)
+                    sorted_list(j+1,:) = temp
+                end if
+            end do
         end do
 
         print *, "Sorted based on integer size"
-        do i = 1, size(sorted_list, dim=1) - 1
+        do i = 1, size(sorted_list, dim=1)
             write(*,'(2I20)') sorted_list(i,1), sorted_list(i,2)
         end do
     end subroutine print_by_n
