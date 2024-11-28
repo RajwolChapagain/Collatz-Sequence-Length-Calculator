@@ -24,4 +24,24 @@ contains
         end do
     end function calculate_sequence_length
 
+
+    integer(kind=16) function get_min_index(seq_list) result(min_ind)
+        integer(kind=16), intent(in) :: seq_list(:,:) 
+        integer :: i
+        integer(kind=16) :: min_pair(2)
+
+        min_ind = 1
+        do i = 1, size(seq_list, 1) 
+            min_pair = seq_list(min_ind,:)
+
+            if (seq_list(i,2) < min_pair(2)) then
+                min_ind = i
+            else if (seq_list(i,2) == min_pair(2)) then
+                if (seq_list(i,1) > min_pair(1)) then
+                    min_ind = i
+                end if
+            end if
+        end do
+    end function get_min_index
+
 end program collatz
