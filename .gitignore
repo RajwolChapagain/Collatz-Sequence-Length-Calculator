@@ -1,3 +1,4 @@
 nohup*
 rust*/target*
 *.exe
+*.out
