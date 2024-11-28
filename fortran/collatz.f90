@@ -149,7 +149,7 @@ contains
             end do
         end do
 
-        print *, "Sorted based on sequence length"
+        print "(A)", "Sorted based on sequence length"
         do i = 1, size(sorted_list, dim=1)
             write(*,'(2I20)') sorted_list(i,1), sorted_list(i,2)
         end do
@@ -175,7 +175,7 @@ contains
             end do
         end do
 
-        print *, "Sorted based on integer size"
+        print "(A)", "Sorted based on integer size"
         do i = 1, size(sorted_list, dim=1)
             write(*,'(2I20)') sorted_list(i,1), sorted_list(i,2)
         end do
