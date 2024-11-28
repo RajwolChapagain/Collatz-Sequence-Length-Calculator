@@ -2,21 +2,16 @@ program collatz
     integer(kind=16), allocatable :: seq_list(:,:)
     integer ind
 
-    call compare_and_add(10_16, 44_16, seq_list) 
-    call compare_and_add(12_16, 45_16, seq_list) 
+    call compare_and_add(10_16, 90_16, seq_list) 
+    call compare_and_add(12_16, 80_16, seq_list) 
     call compare_and_add(14_16, 46_16, seq_list) 
     call compare_and_add(18_16, 60_16, seq_list) 
     call compare_and_add(19_16, 70_16, seq_list) 
-    call compare_and_add(20_16, 71_16, seq_list) 
-    call compare_and_add(21_16, 73_16, seq_list) 
-    call compare_and_add(22_16, 74_16, seq_list) 
-    call compare_and_add(23_16, 75_16, seq_list) 
-    call compare_and_add(24_16, 76_16, seq_list) 
-    call compare_and_add(25_16, 77_16, seq_list) 
 
-    do i = 1, size(seq_list, dim=1)
-        print *, i, ": ", seq_list(i, 1), " ", seq_list(i, 2)
-    end do
+
+
+    call print_by_seq_len(seq_list)
+    call print_by_n(seq_list)
 
 contains
     integer(kind=16) function calculate_sequence_length(n) result(counter)
@@ -122,4 +117,56 @@ contains
 
     end subroutine
 
+    subroutine print_by_seq_len(seq_list)
+        integer(kind=16), intent(in) :: seq_list(:,:)
+        integer(kind=16), allocatable :: sorted_list(:,:)
+        integer :: i, j
+        integer(kind=16) :: temp(2)
+
+        ! Copy input array to avoid modifying it
+        sorted_list = seq_list
+
+        ! Bubble sort by sequence length (second column)
+        do i = 1, size(sorted_list, dim=1) - 1
+        do j = 1, size(sorted_list, dim=1) - 1 -i
+        if (sorted_list(j,2) < sorted_list(j+1,2)) then
+            ! Swap entire rows
+            temp = sorted_list(j,:)
+            sorted_list(j,:) = sorted_list(j+1,:)
+            sorted_list(j+1,:) = temp
+        end if
+        end do
+        end do
+
+        print *, "Sorted based on sequence length"
+        do i = 1, size(sorted_list, dim=1) - 1
+            write(*,'(2I20)') sorted_list(i,1), sorted_list(i,2)
+        end do
+    end subroutine print_by_seq_len
+
+    subroutine print_by_n(seq_list)
+        integer(kind=16), intent(in) :: seq_list(:,:)
+        integer(kind=16), allocatable :: sorted_list(:,:)
+        integer :: i, j
+        integer(kind=16) :: temp(2)
+
+        ! Copy input array to avoid modifying it
+        sorted_list = seq_list
+
+        do i = 1, size(sorted_list, dim=1) - 1
+        do j = 1, size(sorted_list, dim=1) - 1 -i
+        if (sorted_list(j,1) < sorted_list(j+1,1)) then
+            ! Swap entire rows
+            temp = sorted_list(j,:)
+            sorted_list(j,:) = sorted_list(j+1,:)
+            sorted_list(j+1,:) = temp
+        end if
+        end do
+        end do
+
+        print *, "Sorted based on integer size"
+        do i = 1, size(sorted_list, dim=1) - 1
+            write(*,'(2I20)') sorted_list(i,1), sorted_list(i,2)
+        end do
+    end subroutine print_by_n
 end program collatz
