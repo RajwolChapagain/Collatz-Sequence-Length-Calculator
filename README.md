@@ -65,7 +65,21 @@ cd c#Recur
 ```
 mcs -r:System.Numerics Collatz.cs
 ```
-2. Run the program by passing in two integers in the range 1 to 2,100,000,000 as command-line arguments to the program:
+3. Run the program by passing in two integers in the range 1 to 2,100,000,000 as command-line arguments to the program:
 ```
 mono Collatz.exe 50 100
+```
+
+### Julia
+1. Navigate to the julia or juliaRecur directory depending on whether you want to run the loop-based or the recursive implmentation of the program.
+```
+cd julia
+```
+or
+```
+cd juliaRecur
+```
+2. Run the program by passing in two integers in the range 1 to 2,100,000,000 as command-line arguments to the program:
+```
+julia collatz.jl 50 100
 ```
