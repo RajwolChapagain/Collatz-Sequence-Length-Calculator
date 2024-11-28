@@ -12,10 +12,6 @@ public class Collatz {
         BigInteger end = BigInteger.Parse(args[1]);
 
         for (BigInteger i = start; i < end + 1; i++) {
-            if (i % 100000 == 0) {
-                Console.WriteLine($"At {i.ToString("N0", CultureInfo.InvariantCulture)}");
-            }
-
             BigInteger seq_len = CalculateSequenceLength(i);
             CompareAndAdd(i, seq_len, seq_list);
         }

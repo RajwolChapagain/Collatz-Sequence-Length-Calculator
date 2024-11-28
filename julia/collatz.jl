@@ -80,10 +80,6 @@ function main()
     end_val = parse(UInt128, ARGS[2])
 
     for i in range(start_val, end_val)
-        if i % 100000 == 0
-            println("At ", i)
-        end
-
         seq_len = calculate_sequence_length(i)
         compare_and_add(i, seq_len, seq_list)
     end

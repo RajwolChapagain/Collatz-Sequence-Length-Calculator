@@ -8,10 +8,6 @@ fn main() {
     let end: u128 = args[2].parse().expect("Not a valid number!"); 
 
     for i in start..=end {
-        if i % 100000 == 0 {
-            println!("At {}", i.to_formatted_string(&Locale::en));
-        }
-
         let seq_len = calculate_sequence_length(i);
         compare_and_add(i, seq_len, &mut seq_list);
     }

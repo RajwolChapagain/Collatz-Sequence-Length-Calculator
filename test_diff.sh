@@ -6,7 +6,7 @@ if [ "$#" -lt 2 ]; then
 fi
 
 CMD1="sbcl --script lispRecur/collatz.lisp"
-CMD2="julia juliaRecur/collatz.jl"
+CMD2="./fortran/a.out"
 
 GREEN='\033[0;32m'
 RED='\033[0;31m'
