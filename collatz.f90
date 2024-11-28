@@ -1,10 +1,18 @@
 program collatz
-    integer(kind=16) x
+    integer(kind=16), allocatable :: seq_list(:,:)
+    integer ind
 
-    x = calculate_sequence_length(989345275647_16)
+    allocate(seq_list(3, 2))
+    seq_list(1, 1) = 10
+    seq_list(1, 2) = 10
+    seq_list(2, 1) = 5
+    seq_list(2, 2) = 5
+    seq_list(3, 1) = 4
+    seq_list(3, 2) = 5
 
-    print *, x
+    ind = get_min_index(seq_list)
 
+    print *, ind
 contains
     integer(kind=16) function calculate_sequence_length(n) result(counter)
         integer(kind=16), intent(in) :: n
@@ -21,6 +29,36 @@ contains
 
             counter = counter + 1
         end do
+    end function
+
+    integer function get_min_index(seq_list) result(min_ind)
+        integer(kind=16), intent(in), allocatable :: seq_list(:,:)
+        integer(kind=16) :: min_pair(2)
+        integer(kind=16) :: pair(2)
+        integer i
+
+        min_ind = 1
+
+        if (.not. allocated(seq_list)) then
+            return
+        endif
+
+        do i = 1, size(seq_list, 1)
+            min_pair(1) = seq_list(min_ind, 1)
+            min_pair(2) = seq_list(min_ind, 2)
+
+            pair(1) = seq_list(i, 1)
+            pair(2) = seq_list(i, 2)
+
+            if (pair(2) < min_pair(2)) then
+                min_ind = i
+            else if (pair(2) == min_pair(2)) then
+                if (pair(1) > min_pair(1)) then
+                    min_ind = i
+                end if
+            end if
+        end do
+
     end function
 
 end program collatz
