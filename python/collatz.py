@@ -16,12 +16,13 @@ def get_min_index(seq_list):
 
         if pair[1] < min_pair[1]:
             min_ind = i
-        elif pair[1] == min_pair[1]:
-            if pair[0] > min_pair[0]:
+        elif pair[1] == min_pair[1]: 
+            if pair[0] > min_pair[0]: # Dead code path. compare_and_add ensures this never happens
                 min_ind = i
 
     return min_ind
 
+# Assumes that n is greater than all existing ns in seq_list
 def compare_and_add(n, seq_len, seq_list):
     for pair in seq_list:
         if seq_len == pair[1]:
