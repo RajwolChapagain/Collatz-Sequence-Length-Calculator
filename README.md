@@ -7,7 +7,7 @@ This repository contains a program that calculates the smallest 10 starting valu
 
 To run this program, first start by cloning this repository:
 ```
-git clone https://anvil.cs.mercer.edu/chapagain_r/collatzconjecture.git
+git clone https://github.com/RajwolChapagain/Collatz-Sequence-Length-Calculator.git
 ```
 
 ### Python
